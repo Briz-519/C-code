@@ -1,51 +1,47 @@
-#include <stdio.h>            
+#include <stdio.h>
+#define N 3
+void input(struct Student stu[]);
 struct Student
 {
 	int num;
-	char name[10];
-	int score[2];
-	float aver;
-}stu[3];
+	char name[5];
+	int score[3];
+	double aver;
+};
 int main()
 {
-	int i, j;
-	float max=0,sum=0,average=0;
-	for (i = 0; i < 3; i++)
+	double s;
+	double aver[3];
+	int max = 0, maxi;
+	struct Student stu[N];
+	input(stu);
+	for (int i = 0; i < 3; i++)
 	{
-		printf("Input num:\n");
-		scanf("%d", &stu[i].num);
-		printf("Name:\n");
-		scanf("%s",&stu[i].name);
-		for (j = 0; j < 2; j++)
-		{
-			printf("Score:\n");
-			scanf("%d",&stu[i].score[j]);
-		}
+		stu[i].aver = (stu[i].score[0] + stu[i].score[1] + stu[i].score[2]) / 3;
 	}
-	for(i=0;i<3;i++)
+	for (int i = 0; i < 3; i++)
 	{
-		for(j=0;j<2;j++)
+		s = 0;
+		max = 0;
+		for (int j = 0; j < N; j++)
 		{
-			sum+=stu[i].score[j];
-			if(stu[i].score[j]>max)
+			s += stu[j].score[i];
+			if (stu[j].score[i]>max)
 			{
-				max=stu[i].score[j];
+				max = stu[j].score[i];
+				maxi = j;
 			}
 		}
-		stu[i].aver=sum/3;
-		sum=0;
-		average+=stu[i].aver;
+		aver[i] = s / 3;
+		printf("Course%d's average:%lf\n",i+1,aver[i]);
+		printf("This course's max score is student%d:\n%d %s %d %d %d %lf\n",maxi+1, stu[maxi].num, stu[maxi].name, stu[maxi].score[0], stu[maxi].score[1], stu[maxi].score[2],stu[maxi].aver);
 	}
-	average/=3;
-	for (i = 0; i < 3; i++)
+}
+void input(struct Student stu[])
+{
+	for (int i = 0; i < N; i++)
 	{
-		printf("No.%d Name:%s Average:%f ",stu[i].num,stu[i].name,stu[i].aver);
-		for (j = 0; j < 2; j++)
-		{
-			printf("Score:%d ",stu[i].score[j]);
-		}
-		printf("\n");
+		printf("Input student%d's data:\n", i + 1);
+		scanf("%d %s %d %d %d", &stu[i].num, stu[i].name, &stu[i].score[0], &stu[i].score[1], &stu[i].score[2]);
 	}
-	printf("All score's average:%f\nMax score:%f\n",average,max);
-	return 0;
 }

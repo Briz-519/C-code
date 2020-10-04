@@ -1,37 +1,37 @@
 #include <stdio.h>
+void swap(int *p1, int n);
 int main()
 {
-	void swap(int a[20],int n,int m);
-	int a[20],n,m,i;
-	printf("How many number:\n");
-	scanf("%d",&n);
-	printf("input n number:\n");
-	for(i=0;i<n;i++)
+	int a[5], b[10], n;
+	printf("Enter 5 number:\n");
+	for (int i = 0; i < 5; i++)
 	{
-		scanf("%d",&a[i]);
+		scanf("%d", &a[i]);
 	}
-	printf("You want to move:\n");
-	scanf("%d",&m);
-	swap(a,n,m);
-	printf("New:\n");
-	for(i=0;i<n;i++)
+	printf("Enter the number of numbers you want to move:\n");
+	scanf("%d", &n);
+	swap(a, n);
+	printf("The new array:\n");
+	for (int i = 0; i < 5; i++)
 	{
 		printf("%d ",a[i]);
 	}
 	return 0;
 }
-void swap(int a[20],int n,int m)
+void swap(int *p, int n)
 {
-	int a_end,*p;
-	a_end=*(a+n-1);
-	for(p=a+n-1;p>a;p--)
+	int i, j = 0;
+	int t[10];
+	for (i = 0; i < 5; i++)
 	{
-		*p=*(p-1);
+		t[i] = p[i];
 	}
-	*p=a_end;
-	m--;
-	if(m>0)
+	for (i = 0; i < n; i++)
 	{
-		swap(a,n,m);
+		p[i] = t[5-n+i];
+	}
+	for (i = n; i < 5; i++)
+	{
+		p[i] = t[i-n];
 	}
 }

@@ -1,34 +1,29 @@
 #include <stdio.h>
+#include <string.h>
+void sort(int *p);
 int main()
 {
-	void sort(int *p,int n);
-	int a[20],*p,i,n;
-	printf("input number you want to sort:\n");
-	scanf("%d",&n);
-	printf("enter n number:\n");
-	for(i=0;i<n;i++)
+	int n[5], i;
+	printf("Enter 5 number:\n");
+	for (i = 0; i < 5; i++)
 	{
-		scanf("%d",&a[i]);
+		scanf("%d", &n[i]);
 	}
-	p=&a[0];
-	sort(p,n);
-	printf("New array:\n");
-	for(i=0;i<n;i++)
+	sort(n);
+	printf("Reverse array:\n");
+	for (i = 0; i < 5; i++)
 	{
-		printf("%d ",*(p+i));
+		printf("%d ",n[i]);
 	}
 	return 0;
 }
-void sort(int *p,int n)
+void sort(int *p)
 {
-	int t,*p1,*p2;
-	int i;
-	for(i=0;i<n/2;i++)
+	int i, t;
+	for (i = 0; i < 2; i++)
 	{
-		p1=p+i;
-		p2=p+(n-1-i);
-		t=*p1;
-		*p1=*p2;
-		*p2=t;
+		t = *(p+i);
+		*(p+i) = *(p + 4 - i);
+		*(p + 4 - i) = t;
 	}
 }

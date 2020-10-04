@@ -26,61 +26,56 @@ int main()
 }
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #define LEN sizeof(struct Student)
+struct Student *creat();
+void print(struct Student *p);
 struct Student
 {
-	long num;
-	float score;
-	struct Student* next;
+	int num;
+	int score;
+	struct Student *next;
 };
 int n;
 int main()
 {
-	void print(struct Student* head);
-	struct Student* creat(void);
-	struct Student* head;
-	head = creat();
-	print(head);
+	struct Student *pt;
+	pt = creat();
+	print(pt);
 	return 0;
 }
-struct Student* creat(void)
+struct Student *creat()
 {
-	struct Student* head;
-	struct Student *p1, * p2;
-	p1 = p2 = (struct Student*)malloc(LEN);
-	scanf_s("%ld%f",&p1->num,&p1->score);
+	struct Student *head, *p1, *p2;
+	n = 0;
+	p1 = p2 = (struct Student *)malloc(LEN);
+	scanf("%d %d", &p1->num, &p1->score);
 	head = NULL;
-	for (n = 0; p1->num != 0; )
+	while (p1->num != 0)
 	{
-		n = n + 1;
-		if (n == 1)
+		++n;
+		if (n == 1)	//说明此时输入了非0的数字，将第一组数据的地址赋给head作为第一个结点
 		{
 			head = p1;
 		}
-		else
+		else			//此时将p1的数据赋给p2的next成员
 		{
 			p2->next = p1;
 		}
-		p2 = p1;
+		p2 = p1;	//将p2指向p1的数据，此时next成员准备接收下一组数据的地址
 		p1 = (struct Student *)malloc(LEN);
-		scanf_s("%ld%f",&p1->num,&p1->score);
+		scanf("%d %d", &p1->num, &p1->score);
 	}
 	p2->next = NULL;
 	return head;
 }
-
-void print(struct Student* head)
+void print(struct Student *p)
 {
-	struct Student* p;
-	p = head;
-	printf("These %d records are:\n",n);
-	if (head != NULL)
+	printf("There %d records are:\n",n);
+	while (p != NULL)
 	{
-		while (p != NULL)
-		{
-			printf("%ld\t%f\n",p->num,p->score);
-			p = p->next;
-		}
+		printf("%d %d\n", p->num, p->score);
+		p = p->next;
 	}
 }

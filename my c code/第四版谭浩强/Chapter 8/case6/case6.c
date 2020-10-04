@@ -1,20 +1,21 @@
 #include <stdio.h>
+int length(char *p);
 int main()
 {
-	int length(char *str);
 	char str[20];
-	int len;
-	printf("input string:\n");
+	char *p;
+	printf("Enter a string:\n");
 	scanf("%s",str);
-	len=length(str);
-	printf("The length of string is:%d\n",len);
+	p = str;
+	printf("This string has %d alphabets\n",length(p));
 	return 0;
 }
-int length(char *str)
+int length(char *p)
 {
-	int n=0;
-	for(;*str!='\0';str++)
+	int n = 0;
+	while (*p != '\0')
 	{
+		p++;
 		n++;
 	}
 	return n;

@@ -1,81 +1,83 @@
 #include <stdio.h>
+#include <string.h>
+double course1_aver(double(*p)[3]);
+void fail(double(*p)[3], int n);
+void good(double(*p)[3]);
 int main()
 {
-	void good(float *p);
-	void fail(float *p);
-	void averc(float *p);
-	float a[3][3],*p;
-	int i,j;
-	printf("enter stu's sorce:\n");
-	for(i=0;i<3;i++)
+	double a[3][3];
+	int i, j, flag = 0;
+	printf("Enter 3 students' grades:\n");
+	for (i = 0; i < 3; i++)
 	{
-		for(j=0;j<3;j++)
+		for (j = 0; j < 3; j++)
 		{
-			scanf("%f",&a[i][j]);
+			scanf("%lf", &a[i][j]);
 		}
 	}
-	p=&a[0][0];
-	averc(p);
-	fail(p);
-	good(p);
-	return 0;
-}
-void averc(float *p)
-{
-	float sum=0,aver;
-	int i;
-	for(i=0;i<3;i++)
+	printf("course 1's average:%lf\n", course1_aver(*a));
+	for (i = 0; i < 3; i++)
 	{
-		sum+=*(p+3*i);	
-	}
-	aver=sum/3;
-	printf("Course 1's average:%f\n",aver);
-}
-void fail(float *p)
-{
-	int i,j,flag=0;
-	for(i=0;i<3;i++)
-	{
-		for(j=0;j<3;j++)
+		for (j = 0; j < 3; j++)
 		{
-			if(*(p+3*i+j)<60)
+			if (a[i][j] < 60)
 			{
 				flag++;
 			}
-		}
-		if(flag>=2)
+			if (flag >= 2)
 			{
-				printf("No.%d stu fails two courses!\nAnd grades:\n",i+1);
-				for(j=0;j<3;j++)
-				{
-					printf("%f ",*(p+3*i+j));
-				}
-				printf("\n");
+				printf("Student %d has failed:\n", i);
+				fail(*a, i);
 				flag=0;
+				break;
 			}
+		}
 	}
+	good(*a);
 }
-void good(float *p)
+double course1_aver(double(*p)[3])
 {
-	int i,j,flag=0;;
-	for(i=0;i<3;i++)
+	int i;
+	double s = 0.0;
+	for (i = 0; i < 3; i++)
 	{
-		for(j=0;j<3;j++)
+		s += *(*p + i);
+	}
+	return s / 3;
+}
+void fail(double(*p)[3],int n)
+{
+	int i;
+	for (i = 0; i < 3; i++)
+	{
+		printf("%lf ", *(*(p + n) + i));
+	}
+	printf("\n");
+}
+void good(double(*p)[3])
+{
+	int i, j, flag;
+	double s;
+	for (i = 0; i < 3; i++)
+	{
+		s = 0;
+		flag = 0;
+		for (j = 0; j < 3; j++)
 		{
-			if(*(p+3*i+j)>85)
+			s += *(*(p + i) + j);
+			if (*(*(p + i) + j) >= 85)
 			{
 				flag++;
 			}
 		}
-		if(flag==3)
+		if ((s / 3) >= 90 || flag == 3)
 		{
-			printf("No.%d stu is good,and the grade:\n",i+1);
-			for(j=0;j<3;j++)
+			printf("Student %d is brilliant:\n",i);
+			for (j = 0; j < 3; j++)
 			{
-				printf("%f ",*(p+3*i+j));
+				printf("%lf ",*(*(p+i)+j));
 			}
 			printf("\n");
-			flag=0;
 		}
 	}
 }

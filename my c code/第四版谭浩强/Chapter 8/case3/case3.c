@@ -1,56 +1,56 @@
 #include <stdio.h>
-#define N 5
+#include <string.h>
+void scan(int *p);
+void swap(int *p);
+void print(int *p);
 int main()
 {
-	void input(int *p);
-	void swap(int *p);
-	void output(int *p);
-	int a[N];
-	input(a);
+	int a[5];
+	scan(a);
 	swap(a);
-	output(a);
-	return 0;
+	print(a);
 }
-void input(int *p)
+void scan(int *p)
 {
 	int i;
-	printf("input %d number:\n",N);
-	for(i=0;i<N;i++)
+	for (i = 0; i < 5; i++)
 	{
-		scanf("%d",p+i);
+		scanf("%d", p + i);
 	}
 }
 void swap(int *p)
 {
-	int i,t;
-	int *max=p,*min=p;
-	for(i=0;i<N;i++)
+	int t, i;
+	int *min, *max;
+	min = p;
+	max = p;
+	for (i = 0; i < 5; i++)
 	{
-		if(*(p+i)>*max)
+		if (*(p + i) < *min)
 		{
-			max=p+i;
+			min = p + i;
 		}
-		else if(*(p+i)<*min)
+		else if (*(p + i) > *max)
 		{
-			min=p+i;
+			max = p + i;
 		}
 	}
-	t=*p;
-	*p=*min;
-	*min=t;
-	if(max==p)
+	t = p[0];
+	p[0] = *min;
+	*min = t;
+	if (max == p)
 	{
-		max=min;
+		max = min;
 	}
-	t=*(p+N-1);
-	*(p+N-1)=*max;
-	*max=t;
+	t = p[4];
+	p[4] = *max;
+	*max = t;
 }
-void output(int *p)
+void print(int *p)
 {
 	int i;
-	for(i=0;i<N;i++)
+	for (i = 0; i < 5; i++)
 	{
-		printf("%d ",*(p+i));
+		printf("%d ", *(p + i));
 	}
 }

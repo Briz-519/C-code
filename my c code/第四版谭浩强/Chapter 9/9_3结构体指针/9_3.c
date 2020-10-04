@@ -41,48 +41,38 @@ int main()
 }
 */
 
+#include <stdio.h>
+#include <string.h>
 struct Student
 {
-	int no;
 	char name[10];
-	float score[3];
-	float aver;
+	int count[3];
+	double aver;
 };
 int main()
 {
-	void input(struct Student stu[]);
-	struct Student max(struct Student stu[]);
-	void print(struct Student stu1);
-	struct Student stu[3],*p;
-	p=stu;
-	input(p);
-	print(max(p));
-	return 0;
-}
-void input(struct Student stu[])
-{
-	int i;
-	printf("Enter Stu's No,name and three courses' score:\n");
-	for(i=0;i<3;i++)
+	int i, maxi;
+	struct Student stu[3], *pt, max;
+	double s = 0;
+	pt = stu;
+	for (i = 0; i < 3; i++)
 	{
-		scanf("%d %s %f %f %f",&stu[i].no,stu[i].name,&stu[i].score[0],&stu[i].score[1],&stu[i].score[2]);
-		stu[i].aver=(stu[i].score[0]+stu[i].score[1]+stu[i].score[2])/3.0;
+		printf("Enter student's grade:\n");
+		scanf("%s %d %d %d", stu[i].name, &stu[i].count[0], &stu[i].count[1], &stu[i].count[2]);
 	}
-}
-struct Student max(struct Student stu[])
-{
-	int i,m=0;
-	for(i=0;i<3;i++)
+	for (i = 0; i < 3; i++)
 	{
-		if(stu[i].aver>stu[m].aver)
+		stu[i].aver = (stu[i].count[0] + stu[i].count[1] + stu[i].count[2]) / 3.0;
+		s = 0;
+	}
+	max = stu[0];
+	for (i = 0; i < 3; i++)
+	{
+		if (stu[i].aver>max.aver)
 		{
-			m=i;
+			maxi = i;
 		}
 	}
-	return stu[m];
-}
-void print(struct Student stu1)
-{
-	printf("The highest score:\n");
-	printf("No:%d\tName:%s\tScore:%f %f %f\tAver:%f\n",stu1.no,stu1.name,stu1.score[0],stu1.score[1],stu1.score[2],stu1.aver);
+	printf("The max average:\n%s %d %d %d %lf\n", stu[maxi].name, (pt + maxi)->count[0], (pt + maxi)->count[1], (pt + maxi)->count[2], (pt + maxi)->aver);
+	return 0;
 }

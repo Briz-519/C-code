@@ -1,34 +1,39 @@
 #include <stdio.h>
+#include <string.h>
 int main()
 {
-	int i,k,m,n,num[50],*p;
-	printf("input the number of person:\n");
-	scanf("%d",&n);
-	p=num;
-	for(i=0;i<n;i++)
+	int a[100], i, m, n, flag = 0, t;
+	printf("Enter people's number:\n");
+	scanf("%d", &n);
+	t = n;
+	for (i = 0; i < n; i++)
 	{
-		*(p+i)=i+1;
+		a[i] = i + 1;
 	}
-	i=0;
-	k=0;
-	for(m=0;m<n-1;i++)
+	i = 0;
+	while (n > 1)
 	{
-		if(i==n)i=0;
-		if(*(p+i)!=0)
+		if (a[i] != 0)
 		{
-			k++;
+			flag++;
 		}
-		if(k==3)
+		if (flag == 3)
 		{
-			*(p+i)=0;
-			k=0;
-			m++;
+			a[i] = 0;
+			flag = 0;
+			n--;
+		}
+		i++;
+		if (i == t)    //新一轮叫3的人
+		{
+			i = 0;
 		}
 	}
-	while(*p==0)
+	for (i = 0; i < t; i++)
 	{
-		p++;
+		if (a[i] != 0)
+		{
+			printf("No.%d\n",a[i]);
+		}
 	}
-	printf("The last one is %d\n",*p);
-	return 0;
 }

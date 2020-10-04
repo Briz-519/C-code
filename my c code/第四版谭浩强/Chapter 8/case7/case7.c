@@ -33,3 +33,18 @@ void copystr(char *p1,char *p2,int n)
 	}
 	*p2='\0';
 }
+/*
+void str_copy(char *p1, char *p2, int m)
+{
+	int i, j = 0;
+	char t[20];
+	for (i = 0; i<=strlen(p1); i++)
+	{
+		t[i] = p1[i];
+	}
+	for (i=0; i<strlen(t); i++)
+	{
+		p2[i] = t[i+m];
+	}
+}
+*/

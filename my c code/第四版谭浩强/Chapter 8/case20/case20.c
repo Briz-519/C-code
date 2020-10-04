@@ -1,41 +1,38 @@
 #include <stdio.h>
 #include <string.h>
+void sort(char *p);
 int main()
 {
-	void sort(char **p);
-	char **p,*pstr[5],str[5][10];
+	char str[5][20], *a[5], **p;
 	int i;
-	for(i=0;i<5;i++)
+	printf("Enter 5 strings:\n");
+	for (i = 0; i < 5; i++)
 	{
-		pstr[i]=str[i];
+		gets(str[i]);
+		a[i] = str[i];
 	}
-	printf("Please input 5 strings:\n");
-	for(i=0;i<5;i++)
-	{
-		scanf("%s",pstr[i]);
-	}
-	p=pstr;
+	p = a;
 	sort(p);
-	printf("Sorted array:\n");
-	for(i=0;i<5;i++)
+	printf("New array:\n");
+	for (i = 0; i < 5; i++)
 	{
-		printf("%s\n",pstr[i]);
+		printf("%s\n",a[i]);
 	}
 	return 0;
 }
 void sort(char **p)
 {
-	int i,j;
+	int i, j;
 	char *t;
-	for(i=0;i<5;i++)
+	for (i = 0; i < 4; i++)
 	{
-		for(j=i+1;j<5;j++)
+		for (j = 0; j < 4 - i; j++)
 		{
-			if(strcmp(*(p+i),*(p+j))>0)
+			if (strcmp(*(p + j), *(p + j + 1))>0)
 			{
-				t=*(p+i);
-				*(p+i)=*(p+j);
-				*(p+j)=t;
+				t = *(p + j);
+				*(p + j) = *(p + j + 1);
+				*(p + j + 1) = t;
 			}
 		}
 	}
