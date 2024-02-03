@@ -1,34 +1,40 @@
-#include <stdio.h>
+  #include <stdio.h>
 #include <string.h>
+
 int main()
 {
-	int flag1=0,flag2=0,i,num=2;
-	char cname[10]="Briz",cpassword[10]="2000519",name[10],password[10];
-	for(i=0;i<3;i++)
-	{
-		printf("input user name:\n");
-		gets(name);
+    int  tryy = 0 ;
+		  // cpassword and cname cannot be used by user 
+		  // if someone use this name and password than it will show wrong userrname and password
+		  // if user use diff password and name then welcom
+	int i, mxtry=3 , cpassword=2000519 , password[10];
+	char cname[10]="Briz",name[10] ;
+	do {
+		printf("\n\ninput user name:\n");
+		scanf("%s" , &name);
 		printf("input password:\n");
-		gets(password);
-		if(strcmp(name,cname)==0)
-		{
-			flag1=1;
-		}
-		if(strcmp(password,cpassword)==0)
-		{
-			flag2=1;
-		}
-		if(flag1==1&&flag2==1)
+		scanf("%d" , &password);
+	
+		if( name != cname || password != cpassword)
 		{
 			printf("Welcome!\n");
 			break;
 		}
-		else
-		{
+		else {
+		     tryy == tryy++ ;
 			printf("Wrong user name or password!\n");
-			printf("You have try %d times and you can try %d times!",num,num--);
+			
+			if (mxtry - tryy == 0)
+			{
+			    printf("You have entered three times faultly and no more times!");
+			    printf( " \n\t\tPlease exit!\n  "  );
+			 break ;
+			}
+			else{printf("You have tried %d times and you can try %d times!",tryy,mxtry-tryy);}
+			
 		}
-	}
-	printf("You have entered three times faultly and no more times!Please exit!\n");
+		
+	}while(mxtry - tryy > 0);
+	
 	return 0;
 }
